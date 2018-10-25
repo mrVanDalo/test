@@ -2,7 +2,7 @@ package services
 
 import java.util.UUID
 
-import models.Listing
+import models.{Address, Contact, Listing}
 import org.scalatestplus.play.PlaySpec
 import org.scalatestplus.play.guice.GuiceOneAppPerTest
 import play.api.test.Injecting
@@ -11,12 +11,13 @@ import services.{database => db}
 class ListingsMapperTest extends PlaySpec with GuiceOneAppPerTest with Injecting {
 
 
-  "map" should {
+  "mapListing" should {
     "not delete old parameters" in {
       val mapper = new ListingsMapper()
 
       val id = UUID.randomUUID()
-      val result : Listing = mapper.mapListing(id, validData)
+      val result: Listing = mapper.mapListing(id, validData)
+
       result.id mustEqual id
 
       result.contact.phoneNumber mustEqual validData.contact.phoneNumber
@@ -29,6 +30,38 @@ class ListingsMapperTest extends PlaySpec with GuiceOneAppPerTest with Injecting
 
       result.location.lat mustEqual validData.location.latitude
       result.location.lng mustEqual validData.location.longitude
+    }
+  }
+
+  "mapContact" should {
+    "properly format phone numbers" in {
+      val mapper = new ListingsMapper()
+
+      val dbContact = db.Contact("+412345232")
+
+      val result : Contact = mapper.mapContact(dbContact)
+
+      result.phoneNumber mustEqual dbContact.phoneNumber
+      result.formattedPhone mustEqual "+41-234-5232"
+    }
+  }
+
+  "mapAddress" should {
+    "find correct Country " in {
+      val mapper = new ListingsMapper()
+
+      val dbAddress =
+      db.Address(
+        "1011 W 5th St",
+        "1011",
+        "US",
+        "Austin",
+        "TX",
+      )
+
+      val result : Address = mapper.mapAddress(dbAddress)
+
+      result.country mustEqual "United States of America"
     }
   }
 
