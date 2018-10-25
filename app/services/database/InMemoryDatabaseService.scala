@@ -8,8 +8,8 @@ import scala.concurrent.{ ExecutionContext, Future }
 class InMemoryDatabaseService {
 
   /**
-    * holds the state of the database
-    */
+   * holds the state of the database
+   */
   var map: ConcurrentHashMap[UUID, Listing] = new ConcurrentHashMap[UUID, Listing]()
 
   def find(id: UUID)(implicit ex: ExecutionContext): Future[Option[Listing]] = Future(
