@@ -1,18 +1,26 @@
 package services.database
 
 import java.util.UUID
+import java.util.concurrent.ConcurrentHashMap
 
-import scala.concurrent.Future
+import scala.concurrent.{ ExecutionContext, Future }
 
 class InMemoryDatabaseService {
 
-  var map: Map[UUID, Listing] = Map[UUID, Listing]()
+  /**
+    * holds the state of the database
+    */
+  var map: ConcurrentHashMap[UUID, Listing] = new ConcurrentHashMap[UUID, Listing]()
 
-  def find(id: UUID): Future[Option[Listing]] = Future.successful(
-    Some(Listing(Contact(""), Address("", "", "", "", ""), Location(0, 0)))
+  def find(id: UUID)(implicit ex: ExecutionContext): Future[Option[Listing]] = Future(
+    Option(map.getOrDefault(id, null))
   )
 
-  def save(listing: Listing): Future[UUID] = Future.successful(UUID.randomUUID())
+  def save(listing: Listing)(implicit ex: ExecutionContext): Future[UUID] = Future {
+    val id = UUID.randomUUID()
+    map.put(id, listing)
+    id
+  }
 
   def ready() = true
 

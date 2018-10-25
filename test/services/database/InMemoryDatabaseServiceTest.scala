@@ -3,14 +3,14 @@ package services.database
 import java.util.UUID
 import java.util.concurrent.TimeUnit
 
-import org.scalatest.tools.Durations
 import org.scalatestplus.play._
 import org.scalatestplus.play.guice._
 import play.api.test._
-import play.api.test.Helpers._
 
 import scala.concurrent.duration.Duration
 import scala.concurrent.{Await, Future}
+import scala.concurrent.ExecutionContext.Implicits.global
+
 
 class InMemoryDatabaseServiceTest extends PlaySpec with GuiceOneAppPerTest with Injecting {
 
@@ -20,7 +20,6 @@ class InMemoryDatabaseServiceTest extends PlaySpec with GuiceOneAppPerTest with 
       database.ready() === true
     }
   }
-
 
   "Database.save()" should {
     "return an UUID for successful storing " in {

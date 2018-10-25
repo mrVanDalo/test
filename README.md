@@ -5,6 +5,7 @@ An exercises
 
 * TDD
 * database model and render model are different
+* Interface driven (implementation needs to be correct, and the interface should be easy)
 
 
 # Exercise definition
