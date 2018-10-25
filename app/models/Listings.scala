@@ -24,3 +24,4 @@ case class Address(
 case class Location(
     lat: Double,
     lng: Double)
+
