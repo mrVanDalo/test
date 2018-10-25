@@ -8,12 +8,12 @@ import org.scalatestplus.play.guice.GuiceOneAppPerTest
 import play.api.test.Injecting
 import services.{database => db}
 
-class ListingsMapperTest extends PlaySpec with GuiceOneAppPerTest with Injecting {
+class DatabaseModelMapperTest extends PlaySpec with GuiceOneAppPerTest with Injecting {
 
 
   "mapListing" should {
     "not delete old parameters" in {
-      val mapper = new ListingsMapper()
+      val mapper = new DatabaseModelMapper()
 
       val id = UUID.randomUUID()
       val result: Listing = mapper.mapListing(id, validData)
@@ -35,7 +35,7 @@ class ListingsMapperTest extends PlaySpec with GuiceOneAppPerTest with Injecting
 
   "mapContact" should {
     "properly format phone numbers" in {
-      val mapper = new ListingsMapper()
+      val mapper = new DatabaseModelMapper()
 
       val dbContact = db.Contact("+412345232")
 
@@ -45,7 +45,7 @@ class ListingsMapperTest extends PlaySpec with GuiceOneAppPerTest with Injecting
       result.formattedPhone mustEqual "+41-234-5232"
     }
     "properly format short phone numbers" in {
-      val mapper = new ListingsMapper()
+      val mapper = new DatabaseModelMapper()
 
       val dbContact = db.Contact("+41234")
 
@@ -58,7 +58,7 @@ class ListingsMapperTest extends PlaySpec with GuiceOneAppPerTest with Injecting
 
   "mapAddress" should {
     "find correct Country " in {
-      val mapper = new ListingsMapper()
+      val mapper = new DatabaseModelMapper()
 
       val dbAddress =
       db.Address(

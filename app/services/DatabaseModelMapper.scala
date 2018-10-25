@@ -2,7 +2,6 @@ package services
 
 import java.util.UUID
 
-import com.vitorsvieira.iso.ISOCountry.ISOCountry
 import models.{ Address, Contact, Listing, Location }
 import services.{ database => db }
 import com.vitorsvieira.iso._
@@ -10,7 +9,7 @@ import com.vitorsvieira.iso._
 /**
  * map database objects to REST Api objects
  */
-class ListingsMapper {
+class DatabaseModelMapper {
 
   def mapContact(contact: db.Contact): Contact = Contact(
     phoneNumber = contact.phoneNumber,
