@@ -44,6 +44,16 @@ class ListingsMapperTest extends PlaySpec with GuiceOneAppPerTest with Injecting
       result.phoneNumber mustEqual dbContact.phoneNumber
       result.formattedPhone mustEqual "+41-234-5232"
     }
+    "properly format short phone numbers" in {
+      val mapper = new ListingsMapper()
+
+      val dbContact = db.Contact("+41234")
+
+      val result : Contact = mapper.mapContact(dbContact)
+
+      result.phoneNumber mustEqual dbContact.phoneNumber
+      result.formattedPhone mustEqual "+41-234"
+    }
   }
 
   "mapAddress" should {

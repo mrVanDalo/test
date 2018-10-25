@@ -16,7 +16,13 @@ class ListingsMapper {
     phoneNumber = contact.phoneNumber,
     formattedPhone = {
       val number = contact.phoneNumber
-      s"${number.take(3)}-${number.slice(3, 6)}-${number.drop(6)}"
+      number.length match {
+        case n if n > 6 =>
+          s"${number.take(3)}-${number.slice(3, 6)}-${number.drop(6)}"
+        case n if n > 3 =>
+          s"${number.take(3)}-${number.slice(3, 6)}"
+        case _ => number
+      }
     }
   )
 
