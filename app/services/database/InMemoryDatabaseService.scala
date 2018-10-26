@@ -1,12 +1,14 @@
 package services.database
 
-import models._
 import java.util.UUID
 import java.util.concurrent.ConcurrentHashMap
 
+import javax.inject._
+
 import scala.concurrent.{ ExecutionContext, Future }
 
-class InMemoryDatabaseService {
+@Singleton
+class InMemoryDatabaseService @Inject() extends DatabaseService {
 
   /**
    * holds the state of the database

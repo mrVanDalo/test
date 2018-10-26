@@ -63,19 +63,19 @@ class InMemoryDatabaseServiceTest extends PlaySpec with GuiceOneAppPerTest with 
 
 
   val validData = Listing(
-    Contact(
-      "12123123123"
+    contact = Contact(
+      phoneNumber = "12123123123"
     ),
-    Address(
-      "1011 W 5th St",
-      "1011",
-      "US",
-      "Austin",
-      "TX",
+    address = Address(
+      street = "1011 W 5th St",
+      postalCode = "1011",
+      countryCode = "US",
+      city = "Austin",
+      stateCode = "TX",
     ),
-    Location(
-      40.4255485534668,
-      -3.7075681686401367
+    location = Location(
+      latitude = 40.4255485534668,
+      longitude = -3.7075681686401367
     )
   )
 
