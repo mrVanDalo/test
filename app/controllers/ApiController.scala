@@ -4,7 +4,7 @@ import java.util.UUID
 
 import javax.inject._
 import models._
-import play.api.libs.json.Json
+import play.api.libs.json._
 import play.api.mvc._
 import services.DatabaseModelMapper
 import services.database.InMemoryDatabaseService
@@ -33,7 +33,18 @@ class ApiController @Inject() (
     }
   }
 
-  def post() = Action(Ok("hallo"))
+  // This helper parses and validates JSON using the implicit `placeReads`
+  // above, returning errors if the parsed json fails validation.
+  def validateJson[A: Reads] = parse.json.validate(
+    _.validate[A].asEither.left.map(e => BadRequest(JsError.toJson(e)))
+  )
+
+  def post() = Action.async(validateJson[InputListing]) { request =>
+    val inputListing = request.body
+    databaseService.save(
+      mapper.mapInputToDatabase(inputListing)
+    ).map(id => Ok(s"""{"id":"${id}"}"""))
+  }
 
 }
 

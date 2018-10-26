@@ -23,7 +23,7 @@ class DatabaseModelMapper {
     }
   )
 
-  def mapAddress(address: Address): OutputAdress = OutputAdress(
+  def mapAddress(address: Address): OutputAddress = OutputAddress(
     street = address.street,
     stateCode = address.stateCode,
     city = address.city,
@@ -40,5 +40,13 @@ class DatabaseModelMapper {
       address = mapAddress(listing.address),
       location = listing.location
     )
+
+  def mapInputToDatabase(listing: InputListing): Listing = {
+    Listing(
+      address = Address.tupled(InputAddress.unapply(listing.address).get),
+      contact = Contact(InputContact.unapply(listing.contact).get),
+      location = Location.tupled(Location.unapply(listing.location).get)
+    )
+  }
 
 }

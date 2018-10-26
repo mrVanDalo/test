@@ -68,7 +68,7 @@ class DatabaseModelMapperTest extends PlaySpec with GuiceOneAppPerTest with Inje
         "TX",
       )
 
-      val result : OutputAdress = mapper.mapAddress(dbAddress)
+      val result : OutputAddress = mapper.mapAddress(dbAddress)
 
       result.country mustEqual "United States of America"
     }
