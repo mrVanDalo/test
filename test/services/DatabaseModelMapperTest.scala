@@ -2,11 +2,10 @@ package services
 
 import java.util.UUID
 
-import models.{OutputAdress, OutputContact, OutputListing}
+import models._
 import org.scalatestplus.play.PlaySpec
 import org.scalatestplus.play.guice.GuiceOneAppPerTest
 import play.api.test.Injecting
-import services.{database => db}
 
 class DatabaseModelMapperTest extends PlaySpec with GuiceOneAppPerTest with Injecting {
 
@@ -28,8 +27,8 @@ class DatabaseModelMapperTest extends PlaySpec with GuiceOneAppPerTest with Inje
       result.address.countryCode mustEqual validData.address.countryCode
       result.address.stateCode mustEqual validData.address.stateCode
 
-      result.location.lat mustEqual validData.location.latitude
-      result.location.lng mustEqual validData.location.longitude
+      result.location.lat mustEqual validData.location.lat
+      result.location.lng mustEqual validData.location.lng
     }
   }
 
@@ -37,7 +36,7 @@ class DatabaseModelMapperTest extends PlaySpec with GuiceOneAppPerTest with Inje
     "properly format phone numbers" in {
       val mapper = new DatabaseModelMapper()
 
-      val dbContact = db.Contact("+412345232")
+      val dbContact = Contact("+412345232")
 
       val result : OutputContact = mapper.mapContact(dbContact)
 
@@ -47,7 +46,7 @@ class DatabaseModelMapperTest extends PlaySpec with GuiceOneAppPerTest with Inje
     "properly format short phone numbers" in {
       val mapper = new DatabaseModelMapper()
 
-      val dbContact = db.Contact("+41234")
+      val dbContact = Contact("+41234")
 
       val result : OutputContact = mapper.mapContact(dbContact)
 
@@ -61,7 +60,7 @@ class DatabaseModelMapperTest extends PlaySpec with GuiceOneAppPerTest with Inje
       val mapper = new DatabaseModelMapper()
 
       val dbAddress =
-      db.Address(
+      Address(
         "1011 W 5th St",
         "1011",
         "US",
@@ -75,18 +74,18 @@ class DatabaseModelMapperTest extends PlaySpec with GuiceOneAppPerTest with Inje
     }
   }
 
-  val validData = db.Listing(
-    db.Contact(
+  val validData = Listing(
+    Contact(
       "12123123123"
     ),
-    db.Address(
+    Address(
       "1011 W 5th St",
       "1011",
       "US",
       "Austin",
       "TX",
     ),
-    db.Location(
+    Location(
       40.4255485534668,
       -3.7075681686401367
     )

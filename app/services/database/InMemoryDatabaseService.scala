@@ -1,5 +1,6 @@
 package services.database
 
+import models._
 import java.util.UUID
 import java.util.concurrent.ConcurrentHashMap
 
@@ -26,7 +27,3 @@ class InMemoryDatabaseService {
 
 }
 
-case class Listing(contact: Contact, address: Address, location: Location)
-case class Contact(phoneNumber: String)
-case class Address(street: String, postalCode: String, countryCode: String, city: String, stateCode: String)
-case class Location(latitude: Double, longitude: Double)

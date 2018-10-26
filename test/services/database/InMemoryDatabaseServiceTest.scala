@@ -3,6 +3,7 @@ package services.database
 import java.util.UUID
 import java.util.concurrent.TimeUnit
 
+import models._
 import org.scalatestplus.play._
 import org.scalatestplus.play.guice._
 import play.api.test._
