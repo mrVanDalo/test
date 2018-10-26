@@ -15,6 +15,8 @@ scalaVersion := "2.12.6"
 libraryDependencies += guice
 libraryDependencies += "org.scalatestplus.play" %% "scalatestplus-play" % "3.1.2" % Test
 libraryDependencies += "org.mockito" % "mockito-scala_2.12" % "1.0.0-beta.5" % Test
+libraryDependencies += "com.vitorsvieira" %% "scala-iso" % "0.1.2"
+
 
 // Adds additional packages into Twirl
 //TwirlKeys.templateImports += "com.example.controllers._"
