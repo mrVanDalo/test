@@ -47,7 +47,8 @@ class ApiController @Inject() (
       case None => Future.successful(BadRequest(
         """
           |{"error":"body is not a valid listing"}
-        """.stripMargin))
+        """.stripMargin
+      ))
     }
   }
 

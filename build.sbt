@@ -25,5 +25,8 @@ libraryDependencies += "com.vitorsvieira" %% "scala-iso" % "0.1.2"
 // play.sbt.routes.RoutesKeys.routesImport += "com.example.binders._"
 scalariformPreferences := scalariformPreferences.value
   .setPreference(AlignSingleLineCaseStatements, true)
+  .setPreference(AlignArguments, true)
+  .setPreference(AlignSingleLineCaseStatements, true)
+  .setPreference(DanglingCloseParenthesis, Force)
   .setPreference(DoubleIndentConstructorArguments, true)
-  .setPreference(DanglingCloseParenthesis, Preserve)
+  .setPreference(NewlineAtEndOfFile, true)

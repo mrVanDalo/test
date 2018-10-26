@@ -10,7 +10,7 @@ import com.vitorsvieira.iso._
 class DatabaseModelMapper {
 
   def mapContact(contact: Contact): OutputContact = OutputContact(
-    phoneNumber = contact.phoneNumber,
+    phoneNumber    = contact.phoneNumber,
     formattedPhone = {
       val number = contact.phoneNumber
       number.length match {
@@ -24,27 +24,27 @@ class DatabaseModelMapper {
   )
 
   def mapAddress(address: Address): OutputAddress = OutputAddress(
-    street = address.street,
-    stateCode = address.stateCode,
-    city = address.city,
-    postalCode = address.postalCode,
-    country = ISOCountry.from(address.countryCode)
+    street      = address.street,
+    stateCode   = address.stateCode,
+    city        = address.city,
+    postalCode  = address.postalCode,
+    country     = ISOCountry.from(address.countryCode)
       .map(country => country.englishName).getOrElse("Unknown"),
     countryCode = address.countryCode
   )
 
   def mapListing(id: UUID, listing: Listing): OutputListing =
     OutputListing(
-      id = id,
-      contact = mapContact(listing.contact),
-      address = mapAddress(listing.address),
+      id       = id,
+      contact  = mapContact(listing.contact),
+      address  = mapAddress(listing.address),
       location = listing.location
     )
 
   def mapInputToDatabase(listing: InputListing): Listing = {
     Listing(
-      address = Address.tupled(InputAddress.unapply(listing.address).get),
-      contact = Contact(InputContact.unapply(listing.contact).get),
+      address  = Address.tupled(InputAddress.unapply(listing.address).get),
+      contact  = Contact(InputContact.unapply(listing.contact).get),
       location = Location.tupled(Location.unapply(listing.location).get)
     )
   }

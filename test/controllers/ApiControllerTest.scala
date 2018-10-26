@@ -46,8 +46,8 @@ class ApiControllerTest extends PlaySpec with GuiceOneAppPerTest with Injecting 
           """
           |{"wrong": "data"}
         """.stripMargin
-        ))
-      )
+        )
+      ))
 
       status(response) mustBe BAD_REQUEST
       Json.parse(contentAsString(response))
@@ -75,7 +75,8 @@ class ApiControllerTest extends PlaySpec with GuiceOneAppPerTest with Injecting 
           |  "stateCode":"LO"
           | }
           |}
-        """.stripMargin)))
+        """.stripMargin
+      )))
 
       status(postResponse) mustBe OK
 
@@ -91,8 +92,18 @@ class ApiControllerTest extends PlaySpec with GuiceOneAppPerTest with Injecting 
       val listing = Json.parse(contentAsString(response)).validate[OutputListing].get
 
       listing.id mustBe uuid
-      listing.contact mustBe OutputContact("+41123456", "+41-123-456")
-      listing.address mustBe OutputAddress(street = "waterloo", postalCode = "12321", countryCode = "GB", city = "London", stateCode = "LO", country = "United Kingdom of Great Britain and Northern Ireland")
+      listing.contact mustBe OutputContact(
+        phoneNumber    = "+41123456",
+        formattedPhone = "+41-123-456"
+      )
+      listing.address mustBe OutputAddress(
+        street      = "waterloo",
+        postalCode  = "12321",
+        countryCode = "GB",
+        city        = "London",
+        stateCode   = "LO",
+        country     = "United Kingdom of Great Britain and Northern Ireland"
+      )
       listing.location mustBe Location(lng = 1, lat = 2)
 
     }
