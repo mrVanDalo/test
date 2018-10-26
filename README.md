@@ -1,12 +1,105 @@
 # Play Api Exercises
 
-An exercises
+Create a REST Api as exercise.
+
+## How to run
+
+```shell
+sbt run
+```
+
+## How to run tests
+
+```shell
+sbt test
+```
+
+## Notes
+
+Here are some notes/information about this project.
+
+### TDD
+
+I used Test Driven Development to solve this issue.
+There was always a test that needs to be fixed to add
+
+### Database Model and REST model are different
+
+I don't like to mix the database models and the API models.
+It results sooner or later into problems which are hard to solve.
+
+### Play + Guice as Framework and DI
+
+I used the playframework before and this is why I chose it.
+It comes nowadays with Guice for DI which I prefer over the 
+cake-pattern for Servers.
 
 
-* TDD
-* database model and render model are different
-* Interface driven (implementation needs to be correct, and the interface should be easy)
-* Why Guice and not cake pattern
+### default.nix
+
+This is my [nix-shell](https://nixos.org/) definition
+which installs all programs I need.
+
+# API definition
+
+I wanted wanted to deliver a `swagger.yaml` under `/api/v1/swagger.yaml`
+but I reached my time-limit, so I just sum it up here.
+
+## GET /api/v1/listing/:id
+
+returns the listing for `id` if existing.
+
+### Example
+
+```json
+{
+  "id": "5e22a83a-6f4f-11e6-8b77-86f30ca893d3",
+  "contact": {
+    "phone": "15126841100",
+    "formattedPhone": "+1 512-684-1100"
+  },
+  "address": {
+    "address": "1011 W 5th St",
+    "postalCode": "1011",
+    "countryCode": "US",
+    "city": "Austin",
+    "state": "TX",
+    "country": "United States"
+  },
+  "location": {
+    "lat": 40.4255485534668,
+    "lng": -3.7075681686401367
+  }
+}
+```
+
+## POST /api/v1/listing
+
+save a listing and returns an id to get it back again
+
+### Example
+
+```shell
+curl --include \                                                                                                                                                                          ✔  13:11:08 
+  --request POST \
+  --header "Content-type: application/json" \
+  --data '{"contact":{
+            "phoneNumber":"+41123456"
+           },
+           "location":{
+            "lng":1,
+            "lat":2
+           },
+           "address":{
+            "street":"waterloo",
+            "postalCode":"12321",
+            "countryCode":"GB",
+            "city":"London",
+            "stateCode":"LO"
+           }
+          }' \
+  http://localhost:9000/api/v1/listing/
+```
 
 # Exercise definition
 
