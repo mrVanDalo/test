@@ -2,7 +2,7 @@ package services
 
 import java.util.UUID
 
-import models.{Address, Contact, Listing}
+import models.{OutputAdress, OutputContact, OutputListing}
 import org.scalatestplus.play.PlaySpec
 import org.scalatestplus.play.guice.GuiceOneAppPerTest
 import play.api.test.Injecting
@@ -16,7 +16,7 @@ class DatabaseModelMapperTest extends PlaySpec with GuiceOneAppPerTest with Inje
       val mapper = new DatabaseModelMapper()
 
       val id = UUID.randomUUID()
-      val result: Listing = mapper.mapListing(id, validData)
+      val result: OutputListing = mapper.mapListing(id, validData)
 
       result.id mustEqual id
 
@@ -39,7 +39,7 @@ class DatabaseModelMapperTest extends PlaySpec with GuiceOneAppPerTest with Inje
 
       val dbContact = db.Contact("+412345232")
 
-      val result : Contact = mapper.mapContact(dbContact)
+      val result : OutputContact = mapper.mapContact(dbContact)
 
       result.phoneNumber mustEqual dbContact.phoneNumber
       result.formattedPhone mustEqual "+41-234-5232"
@@ -49,7 +49,7 @@ class DatabaseModelMapperTest extends PlaySpec with GuiceOneAppPerTest with Inje
 
       val dbContact = db.Contact("+41234")
 
-      val result : Contact = mapper.mapContact(dbContact)
+      val result : OutputContact = mapper.mapContact(dbContact)
 
       result.phoneNumber mustEqual dbContact.phoneNumber
       result.formattedPhone mustEqual "+41-234"
@@ -69,7 +69,7 @@ class DatabaseModelMapperTest extends PlaySpec with GuiceOneAppPerTest with Inje
         "TX",
       )
 
-      val result : Address = mapper.mapAddress(dbAddress)
+      val result : OutputAdress = mapper.mapAddress(dbAddress)
 
       result.country mustEqual "United States of America"
     }

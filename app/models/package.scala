@@ -2,13 +2,13 @@ import play.api.libs.json.Json
 
 package object models {
 
-  implicit val addressWrites = Json.writes[Address]
-  implicit val contactWrites = Json.writes[Contact]
+  implicit val addressWrites = Json.writes[OutputAdress]
+  implicit val contactWrites = Json.writes[OutputContact]
   implicit val locationWrites = Json.writes[Location]
-  implicit val listingWrites = Json.writes[Listing]
+  implicit val listingWrites = Json.writes[OutputListing]
 
-  implicit val addressReades = Json.reads[Address]
-  implicit val contactReades = Json.reads[Contact]
+  implicit val addressReades = Json.reads[OutputAdress]
+  implicit val contactReades = Json.reads[OutputContact]
   implicit val locationReades = Json.reads[Location]
-  implicit val listingReades = Json.reads[Listing]
+  implicit val listingReades = Json.reads[OutputListing]
 }

@@ -25,10 +25,15 @@ class ApiController @Inject() (
       case Failure(_) => Future.successful(BadRequest(s"""{"error":"${id} is not a valid UUID"}"""))
       case Success(uuid) =>
         databaseService.find(uuid)
-          .map(data => mapper.mapListing(uuid, data.get))
-          .map(data => Ok(Json.toJson(data)))
+          .map {
+            case Some(data) =>
+              Ok(Json.toJson(mapper.mapListing(uuid, data)))
+            case None => NotFound
+          }
     }
   }
+
+  def post() = Action(Ok("hallo"))
 
 }
 

@@ -6,21 +6,22 @@ class Listings {
 
 }
 
-case class Listing(
+case class OutputListing(
     id: UUID,
-    contact: Contact,
-    address: Address,
+    contact: OutputContact,
+    address: OutputAdress,
     location: Location)
-case class Contact(
+case class OutputContact(
     phoneNumber: String,
     formattedPhone: String)
-case class Address(
+case class OutputAdress(
     street: String,
     postalCode: String,
     countryCode: String,
     city: String,
     stateCode: String,
     country: String)
+
 case class Location(
     lat: Double,
     lng: Double)

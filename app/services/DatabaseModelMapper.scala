@@ -2,7 +2,7 @@ package services
 
 import java.util.UUID
 
-import models.{ Address, Contact, Listing, Location }
+import models.{ OutputAdress, OutputContact, OutputListing, Location }
 import services.{ database => db }
 import com.vitorsvieira.iso._
 
@@ -11,7 +11,7 @@ import com.vitorsvieira.iso._
  */
 class DatabaseModelMapper {
 
-  def mapContact(contact: db.Contact): Contact = Contact(
+  def mapContact(contact: db.Contact): OutputContact = OutputContact(
     phoneNumber = contact.phoneNumber,
     formattedPhone = {
       val number = contact.phoneNumber
@@ -30,7 +30,7 @@ class DatabaseModelMapper {
     lng = location.longitude
   )
 
-  def mapAddress(address: db.Address): Address = Address(
+  def mapAddress(address: db.Address): OutputAdress = OutputAdress(
     street = address.street,
     stateCode = address.stateCode,
     city = address.city,
@@ -40,8 +40,8 @@ class DatabaseModelMapper {
     countryCode = address.countryCode
   )
 
-  def mapListing(id: UUID, listing: db.Listing): Listing =
-    Listing(
+  def mapListing(id: UUID, listing: db.Listing): OutputListing =
+    OutputListing(
       id = id,
       contact = mapContact(listing.contact),
       address = mapAddress(listing.address),
