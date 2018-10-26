@@ -2,7 +2,7 @@ package controllers
 
 import java.util.UUID
 
-import models.{ Location, OutputAddress, OutputContact, OutputListing }
+import models._
 import org.scalatestplus.play._
 import org.scalatestplus.play.guice._
 import play.api.inject.guice.GuiceApplicationBuilder
@@ -104,7 +104,7 @@ class ApiControllerTest extends PlaySpec with GuiceOneAppPerTest with Injecting 
         stateCode   = "LO",
         country     = "United Kingdom of Great Britain and Northern Ireland"
       )
-      listing.location mustBe Location(lng = 1, lat = 2)
+      listing.location mustBe OutputLocation(lng = 1, lat = 2)
 
     }
 

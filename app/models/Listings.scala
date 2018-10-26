@@ -15,11 +15,15 @@ case class Address(
     city: String,
     stateCode: String
 )
+case class Location(
+    latitude: Double,
+    longitude: Double
+)
 
 case class InputListing(
     contact: InputContact,
     address: InputAddress,
-    location: Location
+    location: InputLocation
 )
 case class InputContact(phoneNumber: String)
 case class InputAddress(
@@ -29,12 +33,16 @@ case class InputAddress(
     city: String,
     stateCode: String
 )
+case class InputLocation(
+    lat: Double,
+    lng: Double
+)
 
 case class OutputListing(
     id: UUID,
     contact: OutputContact,
     address: OutputAddress,
-    location: Location
+    location: OutputLocation
 )
 case class OutputContact(
     phoneNumber: String,
@@ -49,8 +57,7 @@ case class OutputAddress(
     country: String
 )
 
-// todo : split to be complete
-case class Location(
+case class OutputLocation(
     lat: Double,
     lng: Double
 )

@@ -38,14 +38,14 @@ class DatabaseModelMapper {
       id       = id,
       contact  = mapContact(listing.contact),
       address  = mapAddress(listing.address),
-      location = listing.location
+      location = OutputLocation.tupled(Location.unapply(listing.location).get)
     )
 
   def mapInputToDatabase(listing: InputListing): Listing = {
     Listing(
       address  = Address.tupled(InputAddress.unapply(listing.address).get),
       contact  = Contact(InputContact.unapply(listing.contact).get),
-      location = Location.tupled(Location.unapply(listing.location).get)
+      location = Location.tupled(InputLocation.unapply(listing.location).get)
     )
   }
 

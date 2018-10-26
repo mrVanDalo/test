@@ -27,8 +27,8 @@ class DatabaseModelMapperTest extends PlaySpec with GuiceOneAppPerTest with Inje
       result.address.countryCode mustEqual validData.address.countryCode
       result.address.stateCode mustEqual validData.address.stateCode
 
-      result.location.lat mustEqual validData.location.lat
-      result.location.lng mustEqual validData.location.lng
+      result.location.lat mustEqual validData.location.latitude
+      result.location.lng mustEqual validData.location.longitude
     }
   }
 
@@ -75,19 +75,19 @@ class DatabaseModelMapperTest extends PlaySpec with GuiceOneAppPerTest with Inje
   }
 
   val validData = Listing(
-    Contact(
-      "12123123123"
+    contact = Contact(
+      phoneNumber = "12123123123"
     ),
-    Address(
-      "1011 W 5th St",
-      "1011",
-      "US",
-      "Austin",
-      "TX",
+    address = Address(
+      street = "1011 W 5th St",
+      postalCode = "1011",
+      countryCode = "US",
+      city = "Austin",
+      stateCode = "TX",
     ),
-    Location(
-      40.4255485534668,
-      -3.7075681686401367
+    location = Location(
+      latitude = 40.4255485534668,
+      longitude = -3.7075681686401367
     )
   )
 
