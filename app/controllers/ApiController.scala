@@ -7,7 +7,7 @@ import models._
 import play.api.libs.json._
 import play.api.mvc._
 import services.DatabaseModelMapper
-import services.database.InMemoryDatabaseService
+import services.database.DatabaseService
 
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
@@ -16,7 +16,7 @@ import scala.util.{ Failure, Success, Try }
 @Singleton
 class ApiController @Inject() (
     cc: ControllerComponents,
-    databaseService: InMemoryDatabaseService,
+    databaseService: DatabaseService,
     mapper: DatabaseModelMapper
 ) extends AbstractController(cc) {
 

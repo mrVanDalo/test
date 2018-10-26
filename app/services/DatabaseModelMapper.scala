@@ -2,6 +2,7 @@ package services
 
 import java.util.UUID
 import models._
+import services.database._
 import com.vitorsvieira.iso._
 
 /**

@@ -3,6 +3,7 @@ package services
 import java.util.UUID
 
 import models._
+import services.database._
 import org.scalatestplus.play.PlaySpec
 import org.scalatestplus.play.guice.GuiceOneAppPerTest
 import play.api.test.Injecting

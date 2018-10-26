@@ -2,24 +2,6 @@ package models
 
 import java.util.UUID
 
-case class Listing(
-    contact: Contact,
-    address: Address,
-    location: Location
-)
-case class Contact(phoneNumber: String)
-case class Address(
-    street: String,
-    postalCode: String,
-    countryCode: String,
-    city: String,
-    stateCode: String
-)
-case class Location(
-    latitude: Double,
-    longitude: Double
-)
-
 case class InputListing(
     contact: InputContact,
     address: InputAddress,
