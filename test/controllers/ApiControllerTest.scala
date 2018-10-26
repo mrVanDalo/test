@@ -40,22 +40,24 @@ class ApiControllerTest extends PlaySpec with GuiceOneAppPerTest with Injecting 
       val injector = new GuiceApplicationBuilder().injector()
       val controller = injector.instanceOf[ApiController]
 
-      val response = controller.post().apply(FakeRequest(POST, "/api/v1/listing/").withBody(
-        """
+      val response = controller.post().apply(FakeRequest(POST, "/api/v1/listing/").withJsonBody(
+        Json.parse(
+          """
           |{"wrong": "data"}
-        """.stripMargin)
+        """.stripMargin
+        ))
       )
 
-      status(response) mustBe OK
+      status(response) mustBe BAD_REQUEST
       Json.parse(contentAsString(response))
     }
 
-    "returns a proper response for known UUID" ignore {
+    "returns a proper response for known UUID" in {
 
       val injector = new GuiceApplicationBuilder().injector()
       val controller = injector.instanceOf[ApiController]
 
-      val response = controller.post().apply(FakeRequest(POST, "/api/v1/listing/").withBody("{}"))
+      val response = controller.post().apply(FakeRequest(POST, "/api/v1/listing/").withJsonBody(Json.parse("{}")))
 
       status(response) mustBe OK
       Json.parse(contentAsString(response))
